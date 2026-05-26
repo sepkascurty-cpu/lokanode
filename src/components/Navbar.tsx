@@ -1,17 +1,22 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Magnetic from "./ui/Magnetic";
-import { Terminal, Shield, Wifi, Cpu, Menu, X } from "lucide-react";
+import { Search, Menu, X, Globe, Wifi, Compass, Cpu, Bell } from "lucide-react";
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [time, setTime] = useState("");
   const [latency, setLatency] = useState(14);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const [currentLang, setCurrentLang] = useState<"en" | "id">("en");
 
   useEffect(() => {
-    // Check current cookie language setting
+    // Keep Google Translate cookie check
     const getCookie = (name: string) => {
       if (typeof document === "undefined") return null;
       const value = `; ${document.cookie}`;
@@ -29,14 +34,13 @@ export default function Navbar() {
 
   const toggleLanguage = () => {
     const nextLang = currentLang === "en" ? "id" : "en";
-    // Set language translation cookie
     document.cookie = `googtrans=/en/${nextLang}; path=/;`;
     document.cookie = `googtrans=/en/${nextLang}; path=/; domain=${window.location.hostname}`;
     window.location.reload();
   };
 
   useEffect(() => {
-    // Real-time HUD Clock (UTC+7 / Local format)
+    // Real-time clock (UTC+7 / Local)
     const updateClock = () => {
       const date = new Date();
       setTime(
@@ -52,14 +56,14 @@ export default function Navbar() {
     updateClock();
     const interval = setInterval(updateClock, 1000);
 
-    // Simulate fluctuating network telemetry
+    // Fluctuating network telemetry (SpaceX cockpit feel)
     const latencyInterval = setInterval(() => {
       setLatency((prev) => {
-        const delta = Math.floor(Math.random() * 5) - 2;
+        const delta = Math.floor(Math.random() * 3) - 1;
         const next = prev + delta;
-        return next < 8 ? 8 : next > 25 ? 25 : next;
+        return next < 10 ? 10 : next > 22 ? 22 : next;
       });
-    }, 3000);
+    }, 4000);
 
     return () => {
       clearInterval(interval);
@@ -67,151 +71,217 @@ export default function Navbar() {
     };
   }, []);
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      setMenuOpen(false);
-    }
-  };
-
-  const navItems = [
-    { label: "Market", target: "market" },
-    { label: "Trending", target: "trending" },
-    { label: "Civilization", target: "civilization" },
-    { label: "Automotive", target: "automotive" },
-    { label: "Space & Defense", target: "space-defense" },
-    { label: "Computing", target: "hardware" },
-    { label: "Geopolitics", target: "geopolitics" },
+  const menuItems = [
+    { label: "Home", href: "/" },
+    { label: "AI", href: "/category/ai" },
+    { label: "Startup", href: "/category/startup" },
+    { label: "Cyber", href: "/category/cyber" },
+    { label: "Gadget", href: "/category/gadget" },
+    { label: "Robotics", href: "/category/robotics" },
+    { label: "Space", href: "/category/space" },
+    { label: "Future", href: "/category/future" },
+    { label: "Reviews", href: "/category/reviews" },
   ];
 
   return (
     <>
-      <header className="fixed top-0 left-0 w-full z-50 px-4 md:px-8 py-4 pointer-events-none">
-        <div className="max-w-7xl mx-auto flex items-center justify-between pointer-events-auto">
+      <header className="fixed top-0 left-0 w-full z-50 glass-header border-white/5 transition-all">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           
-          {/* Logo HUD Panel */}
-          <div className="glass-panel-heavy rounded-xl px-3 py-1.5 border border-white/5 flex items-center gap-2.5 shadow-[0_4px_30px_rgba(0,0,0,0.8)] backdrop-blur-xl">
-            <img src="/logo.jpg" alt="LokaNode Logo" className="h-6 w-6 rounded-md border border-white/10" />
-            <span className="text-xs font-bold tracking-widest text-white font-mono uppercase">
-              LOKA<span className="text-cyan-400">NODE</span>
-            </span>
-            <div className="h-4 w-[1px] bg-white/10 hidden sm:block" />
-            <span className="text-[9px] font-mono text-white/40 hidden sm:inline-block tracking-wider">
-              CIV_OS v9.5
+          {/* Logo - SpaceX / NASA style */}
+          <div className="flex items-center gap-6">
+            <Link href="/" className="flex items-center gap-2 group">
+              <span className="font-heading text-lg font-black tracking-[0.25em] text-white transition-all group-hover:text-blue-400">
+                LOKA<span className="text-blue-500 font-light">NODE</span>
+              </span>
+              <span className="h-1.5 w-1.5 rounded-full bg-blue-600 animate-pulse hidden sm:inline-block" />
+            </Link>
+            <span className="text-[9px] font-mono text-slate-500 hidden xl:inline-block border border-white/10 rounded px-1.5 py-0.5 bg-white/[0.01]">
+              MISSION CONTROL // v4.2
             </span>
           </div>
 
-          {/* Floating Navigation Links - Desktop */}
-          <nav className="hidden lg:flex items-center gap-1 glass-panel rounded-full px-2 py-1.5 border border-white/5 shadow-2xl">
-            {navItems.map((item) => (
-              <Magnetic key={item.label}>
-                <button
-                  onClick={() => scrollToSection(item.target)}
-                  className="px-4 py-2 text-xs font-medium text-white/70 hover:text-white transition-colors uppercase tracking-wider cursor-pointer"
+          {/* Navigation Links - Centered */}
+          <nav className="hidden lg:flex items-center gap-1">
+            {menuItems.map((item) => {
+              const isActive = pathname === item.href;
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className={`px-3.5 py-1.5 text-xs font-semibold uppercase tracking-widest font-heading transition-all rounded-md hover:text-white ${
+                    isActive 
+                      ? "text-blue-400 bg-blue-500/5 border border-blue-500/10" 
+                      : "text-slate-400 border border-transparent hover:bg-white/[0.02]"
+                  }`}
                 >
                   {item.label}
-                </button>
-              </Magnetic>
-            ))}
+                </Link>
+              );
+            })}
           </nav>
 
-          {/* System Telemetry & Quick CTA - Desktop */}
-          <div className="hidden md:flex items-center gap-4">
-            {/* System Status */}
-            <div className="glass-panel px-4 py-2 rounded-xl text-[10px] font-mono flex items-center gap-4 text-white/50 border border-white/5 shadow-lg">
-              <div className="flex items-center gap-1.5">
-                <Wifi className="h-3 w-3 text-cyan-400" />
+          {/* Interactive Utilities & Telemetry HUD */}
+          <div className="flex items-center gap-4">
+            
+            {/* Live Telemetry Panel - Desktop */}
+            <div className="hidden md:flex items-center gap-3.5 text-[9px] font-mono text-slate-400 border border-white/5 bg-space-secondary/40 px-3 py-1.5 rounded-md">
+              <div className="flex items-center gap-1">
+                <Wifi className="h-3 w-3 text-blue-500" />
                 <span>PING: <strong className="text-white">{latency}MS</strong></span>
               </div>
-              <div className="flex items-center gap-1.5">
-                <Cpu className="h-3 w-3 text-purple-400" />
-                <span>AGI CORE: <strong className="text-white">98%</strong></span>
+              <div className="h-2.5 w-[1px] bg-white/10" />
+              <div className="flex items-center gap-1">
+                <Cpu className="h-3 w-3 text-blue-400" />
+                <span>SERVER: <strong className="text-white">SYS_OK</strong></span>
               </div>
-              <div className="flex items-center gap-1.5">
-                <Shield className="h-3 w-3 text-emerald-400" />
-                <span>SEC: <strong className="text-white">SYS_OK</strong></span>
-              </div>
-              <div className="h-3 w-[1px] bg-white/10" />
-              
-              {/* Google Translate Language Toggle */}
+              <div className="h-2.5 w-[1px] bg-white/10" />
+              {/* Language Switch */}
               <button
                 onClick={toggleLanguage}
-                className="flex items-center gap-1.5 text-cyan-400 font-bold hover:text-white transition-colors cursor-pointer"
-                title="Change Platform Language"
+                className="flex items-center gap-1 text-blue-400 font-bold hover:text-blue-300 transition-colors cursor-pointer"
+                title="Switch Language (Google Translate)"
               >
-                <span>🌐 {currentLang === "en" ? "EN" : "ID"}</span>
+                <Globe className="h-3 w-3" />
+                <span>{currentLang === "en" ? "EN" : "ID"}</span>
               </button>
-
-              <div className="h-3 w-[1px] bg-white/10" />
-              <div className="text-cyan-400 font-bold">{time || "00:00:00"}</div>
             </div>
 
-            {/* Premium CTA Button */}
-            <Magnetic>
-              <button 
-                onClick={() => scrollToSection("footer")}
-                className="bg-white text-black font-semibold text-xs tracking-widest px-4 py-2.5 rounded-lg hover:bg-cyan-400 hover:text-black hover:shadow-[0_0_20px_rgba(0,240,255,0.4)] transition-all cursor-pointer uppercase"
-              >
-                Connect Net
-              </button>
-            </Magnetic>
-          </div>
-
-          {/* Mobile Menu Toggle */}
-          <div className="flex items-center gap-2 lg:hidden">
-            {/* Mobile Language Toggle */}
-            <button
-              onClick={toggleLanguage}
-              className="glass-panel-heavy px-3 py-2 rounded-xl text-cyan-400 font-mono text-xs hover:text-white cursor-pointer"
-            >
-              🌐 {currentLang === "en" ? "EN" : "ID"}
-            </button>
-            
-            <div className="glass-panel-heavy px-3 py-2 rounded-xl text-cyan-400 font-mono text-xs">
+            {/* Live Clock Display */}
+            <div className="text-[10px] font-mono text-blue-400 font-bold hidden sm:block border border-blue-500/10 px-2 py-1 rounded bg-blue-500/5">
               {time || "00:00:00"}
             </div>
+
+            {/* Search Toggle Button */}
+            <button
+              onClick={() => setSearchOpen(true)}
+              className="p-2 text-slate-400 hover:text-white transition-colors cursor-pointer border border-white/5 rounded-md hover:bg-white/[0.03]"
+              title="Search Articles"
+            >
+              <Search className="h-4 w-4" />
+            </button>
+
+            {/* Mobile Drawer Trigger */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="glass-panel-heavy p-2.5 rounded-xl border border-white/5 text-white/80 hover:text-white"
+              className="lg:hidden p-2 text-slate-400 hover:text-white transition-colors cursor-pointer border border-white/5 rounded-md hover:bg-white/[0.03]"
             >
-              {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {menuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
             </button>
           </div>
         </div>
       </header>
 
-      {/* Mobile Drawer Overlay */}
+      {/* Search Overlay Modal */}
+      {searchOpen && (
+        <div className="fixed inset-0 z-50 bg-space-black/95 backdrop-blur-md flex items-start justify-center pt-24 px-4 sm:px-6">
+          <div className="w-full max-w-2xl bg-space-secondary border border-white/10 rounded-xl p-5 shadow-2xl relative">
+            <button
+              onClick={() => setSearchOpen(false)}
+              className="absolute top-4 right-4 p-2 text-slate-400 hover:text-white transition-colors cursor-pointer"
+            >
+              <X className="h-4 w-4" />
+            </button>
+            <h3 className="font-heading text-xs font-bold tracking-widest text-slate-400 uppercase mb-3">
+              LOKANODE // SEARCH DATABASE
+            </h3>
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Search articles, technology paradigms, space programs..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full bg-space-black border border-white/10 rounded-lg px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                autoFocus
+              />
+              <Search className="absolute right-3.5 top-3.5 h-4.5 w-4.5 text-slate-500" />
+            </div>
+
+            {/* Quick Suggestions */}
+            <div className="mt-4 pt-3 border-t border-white/5 text-xs text-slate-500 flex flex-wrap items-center gap-2">
+              <span>Trending:</span>
+              {["ASML Lithography", "Orion GPT-6", "SpaceX Telemetry", "Tesla Optimus"].map((term) => (
+                <button
+                  key={term}
+                  onClick={() => setSearchQuery(term)}
+                  className="bg-white/5 hover:bg-white/10 text-slate-300 px-2 py-1 rounded border border-white/5 transition-all text-[11px] cursor-pointer"
+                >
+                  {term}
+                </button>
+              ))}
+            </div>
+            
+            {/* Search Results Mock / Hint */}
+            {searchQuery && (
+              <div className="mt-6 space-y-3 max-h-60 overflow-y-auto">
+                <p className="text-[11px] font-mono text-slate-400 uppercase">
+                  SIMULATING QUERY RESULTS FOR: &quot;{searchQuery}&quot;
+                </p>
+                <div className="bg-space-black/50 border border-white/5 rounded-lg p-3.5 hover:border-blue-500/30 transition-all">
+                  <Link 
+                    href={`/article/silicon-hegemony-asml-taiwan-lithography`} 
+                    onClick={() => setSearchOpen(false)}
+                    className="block group"
+                  >
+                    <div className="text-[10px] font-mono text-blue-400 uppercase mb-1">CYBER // GEOPOLITICS</div>
+                    <h4 className="text-xs font-bold text-white group-hover:text-blue-300 transition-colors">
+                      The Silicon Hegemony: Will ASML EUV Lithography Systems Go Dark in a Global Conflict?
+                    </h4>
+                  </Link>
+                </div>
+                <div className="bg-space-black/50 border border-white/5 rounded-lg p-3.5 hover:border-blue-500/30 transition-all">
+                  <Link 
+                    href={`/article/openai-orion-gpt6-agi-neural-networks`} 
+                    onClick={() => setSearchOpen(false)}
+                    className="block group"
+                  >
+                    <div className="text-[10px] font-mono text-blue-400 uppercase mb-1">AI // NEURAL</div>
+                    <h4 className="text-xs font-bold text-white group-hover:text-blue-300 transition-colors">
+                      OpenAI Orion Architecture: The Distributed Synapse Paradigm for GPT-6 Revealed
+                    </h4>
+                  </Link>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Mobile Menu Drawer */}
       {menuOpen && (
-        <div className="fixed inset-0 z-40 bg-[#030303]/95 backdrop-blur-2xl flex flex-col justify-center px-8 lg:hidden">
-          <div className="cyber-grid opacity-20" />
-          <nav className="flex flex-col gap-6 relative z-10">
-            {navItems.map((item, idx) => (
-              <button
+        <div className="fixed inset-0 z-40 bg-space-black/98 backdrop-blur-xl flex flex-col justify-center px-6 lg:hidden">
+          <div className="orbital-grid opacity-10" />
+          <nav className="flex flex-col gap-5 relative z-10">
+            {menuItems.map((item, idx) => (
+              <Link
                 key={item.label}
-                onClick={() => scrollToSection(item.target)}
-                className="text-left text-2xl font-bold tracking-widest uppercase hover:text-cyan-400 transition-colors border-b border-white/5 pb-2"
-                style={{ animationDelay: `${idx * 100}ms` }}
+                href={item.href}
+                onClick={() => setMenuOpen(false)}
+                className="text-left text-xl font-bold tracking-widest uppercase hover:text-blue-400 transition-colors border-b border-white/5 pb-2 font-heading"
               >
-                <span className="text-cyan-400 mr-4 font-mono text-sm">0{idx + 1}</span>
+                <span className="text-blue-500 mr-4 font-mono text-xs">0{idx + 1}</span>
                 {item.label}
-              </button>
+              </Link>
             ))}
           </nav>
           
-          <div className="absolute bottom-10 left-8 right-8 font-mono text-[10px] text-white/40 space-y-4 border-t border-white/5 pt-6">
-            <div className="grid grid-cols-2 gap-4">
-              <div>SYS_SECURE: ACTIVE</div>
-              <div>AGI SYNERGY: 98%</div>
-              <div>PING TELEMETRY: {latency}MS</div>
+          <div className="absolute bottom-10 left-6 right-6 font-mono text-[9px] text-slate-500 space-y-4 border-t border-white/5 pt-6">
+            <div className="grid grid-cols-2 gap-3.5">
+              <div>SYS_OK: 100%</div>
+              <div>PING DUPLEX: {latency}MS</div>
               <div>TIME STAMP: {time || "00:00:00"}</div>
+              <div>
+                <button
+                  onClick={toggleLanguage}
+                  className="text-blue-400 font-bold"
+                >
+                  🌐 TRANS: {currentLang === "en" ? "EN" : "ID"}
+                </button>
+              </div>
             </div>
-            <button
-              onClick={() => scrollToSection("footer")}
-              className="w-full bg-white text-black font-semibold text-xs tracking-widest py-3 rounded-lg text-center"
-            >
-              CONNECT TO THE NETWORK
-            </button>
+            <div className="text-[8px] text-slate-600 tracking-wider">
+              LOKANODE — TECHNOLOGY BEYOND GRAVITY. ALL SYSTEMS SECURED.
+            </div>
           </div>
         </div>
       )}

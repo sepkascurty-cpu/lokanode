@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import Magnetic from "./ui/Magnetic";
 import { Send, Shield, Server, RefreshCw } from "lucide-react";
 
@@ -18,51 +19,51 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer id="footer" className="bg-[#030303] border-t border-white/5 pt-24 pb-12 relative overflow-hidden text-left">
-      <div className="cyber-grid opacity-10" />
-      <div className="absolute bottom-0 right-0 w-[45vw] h-[45vh] rounded-full filter blur-[150px] pointer-events-none bg-purple-500/[0.03]" />
+    <footer id="footer" className="bg-[#05070A] border-t border-white/5 pt-20 pb-12 relative overflow-hidden text-left z-20">
+      <div className="orbital-grid opacity-10" />
+      <div className="absolute bottom-0 right-0 w-[45vw] h-[45vh] rounded-full filter blur-[150px] pointer-events-none bg-blue-600/[0.02]" />
 
-      <div className="max-w-7xl mx-auto px-6 md:px-8 relative z-10 space-y-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
         
         {/* Top Segment: Brand Title & Newsletter Form */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 border-b border-white/5 pb-16">
           
           {/* Taglines */}
-          <div className="lg:col-span-6 space-y-4">
-            <div className="flex items-center gap-2.5">
-              <img src="/logo.jpg" alt="LokaNode Logo" className="h-8 w-8 rounded-md border border-white/10" />
-              <span className="text-sm font-bold tracking-widest text-cyan-400 font-mono uppercase">
-                LOKA<span className="text-white">NODE</span>
+          <div className="lg:col-span-6 space-y-5">
+            <div className="flex items-center gap-2">
+              <span className="font-heading text-lg font-black tracking-[0.25em] text-white">
+                LOKA<span className="text-blue-500 font-light">NODE</span>
               </span>
+              <span className="h-1.5 w-1.5 rounded-full bg-blue-600" />
             </div>
             
-            <h3 className="text-3xl font-black text-white uppercase tracking-tight leading-none">
-              INTELLIGENCE FOR <br />
-              THE NEXT ERA.
+            <h3 className="text-2xl sm:text-3xl font-heading font-black text-white uppercase tracking-tight leading-none text-gradient">
+              TECHNOLOGY <br />
+              BEYOND GRAVITY.
             </h3>
             
-            <p className="text-xs text-white/50 max-w-sm font-sans leading-relaxed">
-              Synthesizing technological singularities, global supply-chain shifts, and frontier cybernetics to guide the trajectories of modern civilization.
+            <p className="text-xs text-slate-400 max-w-sm font-sans leading-relaxed">
+              Synthesizing technological singularities, space-exploration paths, and advanced cyber security paradigms to chronicle the future of global civilization.
             </p>
           </div>
 
           {/* Futuristic Newsletter Matrix */}
           <div className="lg:col-span-6 space-y-4">
-            <span className="text-[10px] font-mono text-purple-400 uppercase tracking-widest block">
-              SYNDICATE NETWORK SUBSCRIBER
+            <span className="text-[10px] font-mono text-blue-400 uppercase tracking-widest block font-bold">
+              SUBSCRIBE TO THE INTELLIGENCE CORE
             </span>
-            <p className="text-xs text-white/50 font-sans">
-              Enter your address below to synchronize with weekly telemetry indices and intelligence dispatches.
+            <p className="text-xs text-slate-400 font-sans">
+              Synchronize your cortex with weekly telemetry indices, rocket flight manifests, and deep technology reports.
             </p>
 
             {subscribed ? (
               <div className="space-y-4 animate-fade-in text-left">
-                <div className="p-4 bg-cyan-400/10 border border-cyan-400/25 rounded-xl text-xs font-mono text-cyan-400 uppercase tracking-wider animate-pulse">
+                <div className="p-4 bg-blue-500/10 border border-blue-500/25 rounded-lg text-xs font-mono text-blue-400 uppercase tracking-wider animate-pulse">
                   SYSTEM STATUS: NEURAL FEED SYNCED SUCCESSFULLY
                 </div>
-                <div className="p-4 bg-white/5 border border-white/5 rounded-xl text-xs space-y-3">
-                  <p className="text-white/60 font-sans leading-relaxed">
-                    We now have direct telemetry access to update your cortex feed! Connect with our TikTok node for premium next-generation intelligence, AGI news, and daily tech updates:
+                <div className="p-4 bg-white/[0.02] border border-white/5 rounded-lg text-xs space-y-3">
+                  <p className="text-slate-400 font-sans leading-relaxed">
+                    Subscription linked! Connect with our TikTok node for premium next-generation space dispatches, robotics clips, and tech updates:
                   </p>
                   <Magnetic>
                     <a
@@ -87,13 +88,13 @@ export default function Footer() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="IDENTITY@NETWORK.CORE"
                   required
-                  className="flex-grow bg-white/5 border border-white/5 rounded-xl px-4 py-3 text-xs font-mono text-white placeholder-white/20 focus:outline-none focus:border-cyan-400/50 transition-all uppercase"
+                  className="flex-grow bg-white/[0.02] border border-white/5 rounded-lg px-4 py-3 text-xs font-mono text-white placeholder-slate-600 focus:outline-none focus:border-blue-500/50 transition-all uppercase"
                 />
                 
                 <Magnetic>
                   <button
                     type="submit"
-                    className="p-3.5 bg-white hover:bg-cyan-400 text-black rounded-xl transition-all cursor-pointer hover:shadow-[0_0_20px_rgba(0,240,255,0.4)] flex items-center justify-center"
+                    className="p-3 bg-white hover:bg-blue-500 text-black hover:text-white rounded-lg transition-all cursor-pointer hover:shadow-[0_0_15px_rgba(59,130,246,0.3)] flex items-center justify-center border border-transparent"
                   >
                     <Send className="h-4 w-4" />
                   </button>
@@ -109,49 +110,49 @@ export default function Footer() {
           
           {/* Navigation Links */}
           <div className="space-y-4 text-xs font-mono">
-            <span className="text-[9px] text-white/30 uppercase tracking-widest block font-bold">PLATFORM HUB</span>
-            <ul className="space-y-2.5 text-white/60">
-              <li><a href="#market" className="hover:text-cyan-400 transition-colors uppercase">Bloomberg Telemetry</a></li>
-              <li><a href="#trending" className="hover:text-cyan-400 transition-colors uppercase">Emerging Tech</a></li>
-              <li><a href="#civilization" className="hover:text-cyan-400 transition-colors uppercase">AGI Consciousness</a></li>
-              <li><a href="#automotive" className="hover:text-cyan-400 transition-colors uppercase">Auto blueprints</a></li>
+            <span className="text-[9px] text-slate-500 uppercase tracking-widest block font-bold">DOMAIN SECTORS</span>
+            <ul className="space-y-2.5 text-slate-400">
+              <li><Link href="/category/ai" className="hover:text-blue-400 transition-colors uppercase">Artificial Intelligence</Link></li>
+              <li><Link href="/category/startup" className="hover:text-blue-400 transition-colors uppercase">Startup Funding</Link></li>
+              <li><Link href="/category/cyber" className="hover:text-blue-400 transition-colors uppercase">Cyber Defense</Link></li>
+              <li><Link href="/category/robotics" className="hover:text-blue-400 transition-colors uppercase">Autonomous Robotics</Link></li>
             </ul>
           </div>
 
           <div className="space-y-4 text-xs font-mono">
-            <span className="text-[9px] text-white/30 uppercase tracking-widest block font-bold">RESOURCES</span>
-            <ul className="space-y-2.5 text-white/60">
-              <li><a href="#geopolitics" className="hover:text-cyan-400 transition-colors uppercase">Semiconductor war</a></li>
-              <li><a href="#hardware" className="hover:text-cyan-400 transition-colors uppercase">Quantum matrix</a></li>
-              <li><a href="#articles" className="hover:text-cyan-400 transition-colors uppercase">Editorial logs</a></li>
-              <li><a href="#space-defense" className="hover:text-cyan-400 transition-colors uppercase">Tactical command</a></li>
+            <span className="text-[9px] text-slate-500 uppercase tracking-widest block font-bold">RESOURCES</span>
+            <ul className="space-y-2.5 text-slate-400">
+              <li><Link href="/category/space" className="hover:text-blue-400 transition-colors uppercase">Space Exploration</Link></li>
+              <li><Link href="/category/gadget" className="hover:text-blue-400 transition-colors uppercase">Hardware Gadgets</Link></li>
+              <li><Link href="/category/future" className="hover:text-blue-400 transition-colors uppercase">Future Paradigms</Link></li>
+              <li><Link href="/category/reviews" className="hover:text-blue-400 transition-colors uppercase">Analysis Reviews</Link></li>
             </ul>
           </div>
 
-          {/* Simulated node status */}
+          {/* Simulated space telemetry status monitor */}
           <div className="space-y-4 text-xs font-mono col-span-2 text-left">
-            <span className="text-[9px] text-white/30 uppercase tracking-widest block font-bold">GLOBAL SERVER TELEMETRY</span>
+            <span className="text-[9px] text-slate-500 uppercase tracking-widest block font-bold">GLOBAL MISSION TELEMETRY</span>
             
-            <div className="grid grid-cols-2 gap-4 text-[10px] text-white/50 bg-white/[0.01] border border-white/[0.03] p-4 rounded-xl">
+            <div className="grid grid-cols-2 gap-4 text-[10px] text-slate-400 bg-white/[0.01] border border-white/[0.03] p-4 rounded-lg">
               <div className="flex items-center gap-2">
-                <Shield className="h-4 w-4 text-cyan-400" />
+                <Shield className="h-4 w-4 text-blue-500" />
                 <div>
-                  <span className="block text-[8px] text-white/30">SECURITY CORE</span>
-                  <span className="font-bold text-white uppercase">SSL_ACTIVE_OK</span>
+                  <span className="block text-[8px] text-slate-500">SECURITY CORE</span>
+                  <span className="font-bold text-white uppercase">SSL_SECURE_OK</span>
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <Server className="h-4 w-4 text-purple-400" />
+                <Server className="h-4 w-4 text-blue-400" />
                 <div>
-                  <span className="block text-[8px] text-white/30">SERVER REGISTRY</span>
-                  <span className="font-bold text-white uppercase">US-EAST ONLINE</span>
+                  <span className="block text-[8px] text-slate-500">TRANSMIT HUB</span>
+                  <span className="font-bold text-white uppercase">SATELLITE LINK ACTIVE</span>
                 </div>
               </div>
               <div className="flex items-center gap-2 col-span-2 border-t border-white/5 pt-2 mt-1">
-                <RefreshCw className="h-3.5 w-3.5 text-emerald-400 animate-spin" />
+                <RefreshCw className="h-3.5 w-3.5 text-blue-500 animate-spin" />
                 <div>
-                  <span className="block text-[8px] text-white/30">TELEMETRY LINK STATUS</span>
-                  <span className="font-bold text-emerald-400 uppercase">SYNCHRONIZED SHIELD OK</span>
+                  <span className="block text-[8px] text-slate-500">CORE DUPLEX STREAM</span>
+                  <span className="font-bold text-emerald-400 uppercase">SYS_SYNCHRONIZED // 98% SYNC</span>
                 </div>
               </div>
             </div>
@@ -160,12 +161,12 @@ export default function Footer() {
         </div>
 
         {/* Bottom Segment: Copyrights */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 font-mono text-[10px] text-white/30">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 font-mono text-[9px] text-slate-600">
           <div>
-            &copy; {currentYear} LokaNode. All rights reserved. Encryption standard AES-256.
+            &copy; {currentYear} LOKANODE. All rights reserved. Technology Beyond Gravity.
           </div>
           <div>
-            LokaNode &mdash; Intelligence For The Next Era.
+            MISSION ENGINE SECURED. ENCRYPTION PROTOCOL STANDARD AES-256.
           </div>
         </div>
 

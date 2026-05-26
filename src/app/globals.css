@@ -1,280 +1,190 @@
 @import "tailwindcss";
 
-@theme inline {
-  --color-cyber-cyan: #00f0ff;
-  --color-cyber-purple: #bd00ff;
-  --color-cyber-dark: #030303;
-  --color-cyber-gray: #0d0d11;
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@theme {
+  --color-nasa-blue: #1B4DFF;
+  --color-nasa-soft: #3B82F6;
+  --color-nasa-hover: #5EA1FF;
+  --color-space-black: #05070A;
+  --color-space-secondary: #0B1220;
+  --color-space-card: #101826;
+  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-heading: var(--font-space-grotesk), sans-serif;
 }
 
 :root {
-  --background: #030303;
-  --foreground: #f5f5f7;
-  --cyber-cyan: #00f0ff;
-  --cyber-purple: #bd00ff;
-  --cyber-pink: #ff007a;
-  --cyber-red: #ff3b30;
-  --cyber-blue: #007aff;
-  --cyber-green: #34c759;
+  --background: #05070A;
+  --foreground: #FFFFFF;
+  --secondary: #94A3B8;
+  --muted: #64748B;
+  --border: rgba(255, 255, 255, 0.08);
+  --nasa-blue: #1B4DFF;
+  --nasa-blue-soft: #3B82F6;
+  --nasa-blue-hover: #5EA1FF;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
+  font-family: var(--font-sans);
   overflow-x: hidden;
-  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  letter-spacing: -0.011em;
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar - SpaceX minimal */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: #030303;
+  background: #05070A;
 }
 ::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
+  border-radius: 4px;
+  transition: background 0.3s;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--cyber-cyan);
+  background: var(--nasa-blue-soft);
 }
 
-/* Cybernetic Grid Background Animation */
-.cyber-grid {
+/* NASA Mission Control Grid Lines */
+.orbital-grid {
   position: absolute;
   inset: 0;
-  background-size: 50px 50px;
+  background-size: 60px 60px;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  animation: gridMove 40s linear infinite;
+    linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
   pointer-events: none;
   z-index: 1;
 }
 
-.cyber-grid-dots {
+/* NASA Mission Control Grid Dots */
+.orbital-dots {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 0);
-  background-size: 25px 25px;
+  background-image: radial-gradient(rgba(27, 77, 255, 0.08) 1px, transparent 0);
+  background-size: 30px 30px;
   pointer-events: none;
   z-index: 1;
 }
 
-@keyframes gridMove {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 50px 50px;
-  }
-}
-
-/* Glassmorphism Classes */
-.glass-panel {
-  background: rgba(13, 13, 17, 0.45);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.04);
-}
-
-.glass-panel-heavy {
-  background: rgba(8, 8, 12, 0.85);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-}
-
-.glass-panel-cyan {
-  background: rgba(0, 240, 255, 0.02);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(0, 240, 255, 0.08);
-}
-
-.glass-panel-purple {
-  background: rgba(189, 0, 255, 0.02);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(189, 0, 255, 0.08);
-}
-
-/* Ambient Neon Glow */
-.glow-cyan {
-  box-shadow: 0 0 30px rgba(0, 240, 255, 0.15);
-}
-
-.glow-purple {
-  box-shadow: 0 0 30px rgba(189, 0, 255, 0.15);
-}
-
-.glow-text-cyan {
-  text-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
-}
-
-.glow-text-purple {
-  text-shadow: 0 0 10px rgba(189, 0, 255, 0.4);
-}
-
-/* Retro Futuristic Scanline Overlay */
-.scanlines {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(
-    rgba(18, 16, 16, 0) 50%, 
-    rgba(0, 0, 0, 0.25) 50%
-  );
-  background-size: 100% 4px;
-  z-index: 9999;
-  opacity: 0.15;
-}
-
-/* Radial Ambient Glow Background */
-.ambient-glow-1 {
+/* Elegant SpaceX Space Atmosphere Glow */
+.space-glow-1 {
   position: absolute;
-  top: 10%;
+  top: -10%;
   left: 20%;
-  width: 45vw;
-  height: 45vw;
-  background: radial-gradient(circle, rgba(0, 240, 255, 0.04) 0%, transparent 70%);
-  filter: blur(80px);
+  width: 50vw;
+  height: 50vw;
+  background: radial-gradient(circle, rgba(27, 77, 255, 0.04) 0%, transparent 70%);
+  filter: blur(120px);
   pointer-events: none;
   z-index: 0;
 }
 
-.ambient-glow-2 {
+.space-glow-2 {
   position: absolute;
-  bottom: 20%;
-  right: 10%;
-  width: 50vw;
-  height: 50vw;
-  background: radial-gradient(circle, rgba(189, 0, 255, 0.045) 0%, transparent 70%);
+  bottom: -10%;
+  right: 15%;
+  width: 45vw;
+  height: 45vw;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.03) 0%, transparent 70%);
   filter: blur(100px);
   pointer-events: none;
   z-index: 0;
 }
 
-/* Immersive HUD lines and status bars */
-.hud-line {
-  position: relative;
-}
-.hud-line::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(90deg, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0.01) 100%);
-}
-
-.hud-line-glow::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--cyber-cyan), transparent);
-  box-shadow: 0 0 10px var(--cyber-cyan);
-}
-
-/* Mouse cursor follower style */
-.cursor-follower {
+/* Noise overlay - Gives a luxury paper/tactile feel */
+.noise-overlay {
   position: fixed;
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(circle, rgba(0, 240, 255, 0.06) 0%, transparent 70%);
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  z-index: 9998;
-  mix-blend-mode: screen;
-  filter: blur(30px);
-  transition: width 0.3s, height 0.3s, background 0.3s;
-}
-
-.cursor-dot {
-  position: fixed;
-  width: 6px;
-  height: 6px;
-  background: #fff;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
+  inset: 0;
   z-index: 9999;
-  transition: transform 0.1s;
-  box-shadow: 0 0 10px #fff, 0 0 20px var(--cyber-cyan);
+  opacity: 0.015;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
-/* Custom horizontal scrolling container for automotive */
-.horizontal-scroll-container {
+/* Glassmorphism Styles (Apple Dark UI / SpaceX flight panel) */
+.glass-header {
+  background: rgba(5, 7, 10, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glass-panel {
+  background: rgba(11, 18, 32, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: border-color 0.3s, background-color 0.3s;
+}
+.glass-panel:hover {
+  border-color: rgba(59, 130, 246, 0.2);
+  background: rgba(11, 18, 32, 0.55);
+}
+
+.glass-card {
+  background: rgba(16, 24, 38, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.glass-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(27, 77, 255, 0.3);
+  box-shadow: 0 12px 30px -10px rgba(5, 7, 10, 0.9), 0 0 15px rgba(27, 77, 255, 0.08);
+}
+
+/* Custom text and gradient styles */
+.text-nasa-blue {
+  color: var(--nasa-blue-soft);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #FFFFFF 30%, #94A3B8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-nasa-gradient {
+  background: linear-gradient(135deg, #FFFFFF 20%, #3B82F6 70%, #1B4DFF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Infinite marquee */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
   display: flex;
-  flex-wrap: nowrap;
-  will-change: transform;
+  width: max-content;
+  animation: marquee 30s linear infinite;
 }
 
-/* Shimmer/glint effect for hover articles */
-@keyframes glint {
-  0% { left: -100%; }
-  100% { left: 200%; }
-}
-.glint-effect {
+/* Hover shine / sweep effects */
+.shine-hover {
   position: relative;
   overflow: hidden;
 }
-.glint-effect::after {
+.shine-hover::after {
   content: '';
   position: absolute;
   top: 0;
+  left: -150%;
   width: 50%;
   height: 100%;
-  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.08), transparent);
-  transform: skewX(-25deg);
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+  transform: skewX(-20deg);
   pointer-events: none;
 }
-.glint-effect:hover::after {
-  animation: glint 1.2s ease-in-out forwards;
+.shine-hover:hover::after {
+  animation: shineSweep 1.2s ease-in-out forwards;
 }
 
-/* Interactive custom card cyber lines */
-.cyber-card {
-  position: relative;
-  overflow: hidden;
-}
-.cyber-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 10px;
-  height: 10px;
-  border-top: 1.5px solid rgba(255,255,255,0.4);
-  border-left: 1.5px solid rgba(255,255,255,0.4);
-  transition: border-color 0.3s, width 0.3s, height 0.3s;
-}
-.cyber-card::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 10px;
-  height: 10px;
-  border-bottom: 1.5px solid rgba(255,255,255,0.4);
-  border-right: 1.5px solid rgba(255,255,255,0.4);
-  transition: border-color 0.3s, width 0.3s, height 0.3s;
-}
-.cyber-card:hover::before {
-  border-color: var(--cyber-cyan);
-  width: 16px;
-  height: 16px;
-}
-.cyber-card:hover::after {
-  border-color: var(--cyber-cyan);
-  width: 16px;
-  height: 16px;
+@keyframes shineSweep {
+  0% { left: -150%; }
+  100% { left: 200%; }
 }

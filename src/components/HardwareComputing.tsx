@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Cpu, Terminal, Compass, Zap, HelpCircle } from "lucide-react";
+import { Cpu, Terminal, Compass, Zap } from "lucide-react";
 
 interface Qubit {
   id: number;
@@ -47,7 +47,6 @@ export default function HardwareComputing() {
       setQubits((prev) =>
         prev.map((qubit) => {
           if (qubit.state === "superposition") {
-            // Collapse probability to 0 or 1
             const collapsed = Math.random() > 0.5 ? "one" : "zero";
             return { ...qubit, state: collapsed };
           }
@@ -71,40 +70,43 @@ export default function HardwareComputing() {
   };
 
   return (
-    <section id="hardware" className="py-24 relative overflow-hidden bg-[#030303] border-t border-white/5">
-      <div className="cyber-grid opacity-10" />
-      <div className="absolute top-1/4 left-1/3 w-[35vw] h-[35vh] rounded-full filter blur-[120px] pointer-events-none bg-purple-500/[0.03]" />
+    <section id="hardware" className="py-20 relative overflow-hidden bg-[#05070A] border-t border-white/5">
+      <div className="orbital-grid opacity-10" />
+      <div className="absolute top-1/4 left-1/3 w-[35vw] h-[35vh] rounded-full filter blur-[120px] pointer-events-none bg-blue-600/[0.015]" />
 
-      <div className="max-w-7xl mx-auto px-6 md:px-8 relative z-10 space-y-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12">
         
         {/* Section Header */}
-        <div className="space-y-3 text-left">
-          <div className="inline-flex items-center gap-2 text-purple-400 font-mono text-xs uppercase tracking-widest">
-            <Cpu className="h-4.5 w-4.5 animate-pulse text-purple-400" />
+        <div className="border-b border-white/5 pb-5 text-left">
+          <div className="inline-flex items-center gap-2 text-blue-400 font-mono text-[10px] uppercase tracking-widest">
+            <Cpu className="h-4 w-4 animate-pulse text-blue-400" />
             <span>PHOTONIC SILICON HARDWARE</span>
           </div>
-          <h2 className="text-3xl md:text-4xl font-extrabold uppercase text-white tracking-tight leading-none">
-            HARDWARE & <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">COMPUTING</span>
+          <h2 className="text-2xl sm:text-3xl font-heading font-black uppercase text-white tracking-tight leading-none mt-2">
+            HARDWARE & <span className="text-blue-500">QUANTUM NEURAL CORE</span>
           </h2>
+          <p className="text-slate-400 font-sans text-xs sm:text-sm max-w-xl">
+            Simulate leading-edge quantum superposition gates and analyze thermal loads across distributed photonic accelerators.
+          </p>
         </div>
 
         {/* Panel Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           
           {/* Column Left: Quantum Entanglement Qubits Simulator */}
-          <div className="lg:col-span-7 glass-panel rounded-2xl border border-white/5 p-6 flex flex-col justify-between shadow-2xl relative min-h-[400px]">
-            <div className="absolute top-0 right-0 w-36 h-36 bg-purple-500/5 rounded-full filter blur-2xl pointer-events-none" />
+          <div className="lg:col-span-7 bg-space-secondary/20 rounded-xl border border-white/5 p-6 flex flex-col justify-between shadow-2xl relative min-h-[400px]">
+            <div className="absolute top-0 right-0 w-36 h-36 bg-blue-500/5 rounded-full filter blur-2xl pointer-events-none" />
             
-            <div className="flex items-center justify-between border-b border-white/5 pb-4 hud-line font-mono text-xs text-left">
+            <div className="flex items-center justify-between border-b border-white/5 pb-4 font-mono text-xs text-left">
               <div className="space-y-1">
-                <span className="text-white font-bold tracking-wider uppercase block">QUBIT SUPERPOSITION MATRIX</span>
-                <span className="text-[10px] text-white/40 block">Interact with Qubits below to test state entanglement</span>
+                <span className="text-white font-bold tracking-wider uppercase block text-[10px]">QUBIT SUPERPOSITION MATRIX</span>
+                <span className="text-[9px] text-slate-500 block">Interact with Qubits below to test state entanglement</span>
               </div>
-              <Compass className="h-4 w-4 text-purple-400 animate-spin" />
+              <Compass className="h-4 w-4 text-blue-400 animate-spin" />
             </div>
 
             {/* Core Qubits Row Visualization */}
-            <div className="grid grid-cols-3 gap-6 py-12 items-center justify-center">
+            <div className="grid grid-cols-3 gap-6 py-10 items-center justify-center">
               {qubits.map((qubit) => {
                 const isSuper = qubit.state === "superposition";
                 const isOne = qubit.state === "one";
@@ -116,10 +118,10 @@ export default function HardwareComputing() {
                     className="flex flex-col items-center gap-4 group cursor-pointer"
                   >
                     {/* Glowing Bloch Sphere representation */}
-                    <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full border border-white/10 flex items-center justify-center transition-all duration-500 group-hover:border-purple-400/40">
+                    <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full border border-white/10 flex items-center justify-center transition-all duration-500 group-hover:border-blue-400/40">
                       
                       {/* Orbit Ring */}
-                      <div className={`absolute inset-0.5 rounded-full border border-dashed border-purple-400/20 ${
+                      <div className={`absolute inset-0.5 rounded-full border border-dashed border-blue-500/20 ${
                         isSuper ? "animate-[spin_4s_linear_infinite]" : ""
                       }`} />
 
@@ -127,20 +129,20 @@ export default function HardwareComputing() {
                       <div 
                         className={`w-12 h-12 rounded-full transition-all duration-700 relative ${
                           isSuper 
-                            ? "bg-gradient-to-r from-cyan-400 to-purple-500 scale-110 animate-pulse glow-cyan" 
+                            ? "bg-gradient-to-r from-blue-600 via-blue-500 to-blue-300 scale-110 animate-pulse shadow-[0_0_20px_rgba(59,130,246,0.3)]" 
                             : isOne 
-                              ? "bg-purple-500 glow-purple" 
+                              ? "bg-blue-600 shadow-[0_0_15px_rgba(27,77,255,0.4)]" 
                               : "bg-white/5"
                         }`}
                       />
 
                       {/* Overlay label */}
-                      <span className="absolute text-[10px] font-mono text-white/50 bottom-2 uppercase">
+                      <span className="absolute text-[9px] font-mono text-slate-500 bottom-2 uppercase font-semibold">
                         {isSuper ? "Ψ STATE" : isOne ? "|1⟩ STATE" : "|0⟩ STATE"}
                       </span>
                     </div>
 
-                    <span className="text-[10px] font-mono text-white/30 uppercase tracking-widest">
+                    <span className="text-[9px] font-mono text-slate-500 uppercase tracking-widest">
                       Qubit Node 0{qubit.id}
                     </span>
                   </div>
@@ -151,7 +153,7 @@ export default function HardwareComputing() {
             {/* State controller telemetry outputs */}
             <div className="border-t border-white/5 pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 font-mono text-xs text-left">
               <div>
-                <span className="text-[9px] text-white/30 uppercase tracking-widest block">Quantum Probability Density</span>
+                <span className="text-[8px] text-slate-500 uppercase tracking-widest block">Quantum Probability Density</span>
                 <span className="text-white font-bold block mt-1">{quantumStateExpression}</span>
               </div>
 
@@ -159,14 +161,14 @@ export default function HardwareComputing() {
               <div className="flex gap-2">
                 <button
                   onClick={toggleSuperposition}
-                  className="px-4 py-2 border border-purple-500/20 hover:border-purple-500/50 bg-purple-500/[0.02] hover:bg-purple-500/[0.06] text-purple-400 font-bold tracking-wider text-[10px] rounded-lg transition-all cursor-pointer uppercase"
+                  className="px-4 py-2 border border-blue-500/20 hover:border-blue-500/50 bg-blue-500/[0.02] hover:bg-blue-500/[0.06] text-blue-400 font-bold tracking-wider text-[9px] rounded-lg transition-all cursor-pointer uppercase font-mono"
                 >
                   Superposition
                 </button>
                 <button
                   onClick={measureStates}
                   disabled={isMeasuring}
-                  className="px-4 py-2 bg-white hover:bg-purple-400 text-black font-bold tracking-wider text-[10px] rounded-lg transition-all cursor-pointer uppercase hover:shadow-[0_0_15px_rgba(189,0,255,0.4)] disabled:opacity-50"
+                  className="px-4 py-2 bg-white hover:bg-blue-600 text-black hover:text-white font-bold tracking-wider text-[9px] rounded-lg transition-all cursor-pointer uppercase font-mono hover:shadow-[0_0_15px_rgba(27,77,255,0.3)] border border-transparent disabled:opacity-50"
                 >
                   {isMeasuring ? "COLLAPSING..." : "MEASURE STATES"}
                 </button>
@@ -175,51 +177,52 @@ export default function HardwareComputing() {
           </div>
 
           {/* Column Right: Motherboard Photonic Specs */}
-          <div className="lg:col-span-5 glass-panel rounded-2xl border border-white/5 p-6 flex flex-col justify-between shadow-2xl relative text-left">
+          <div className="lg:col-span-5 bg-space-secondary/20 rounded-xl border border-white/5 p-6 flex flex-col justify-between shadow-2xl relative text-left">
+            <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-500/10 to-transparent" />
             <div className="space-y-6">
               <div className="flex items-center gap-2 border-b border-white/5 pb-3">
-                <Terminal className="h-4 w-4 text-cyan-400" />
-                <span className="text-xs font-bold text-white font-mono uppercase tracking-wider">PHOTONIC ACCELERATOR CORE SPEC</span>
+                <Terminal className="h-4 w-4 text-blue-400" />
+                <span className="text-[10px] font-bold text-white font-mono uppercase tracking-wider">PHOTONIC ACCELERATOR CORE SPEC</span>
               </div>
 
               <div className="space-y-4 font-mono text-[11px] leading-relaxed">
                 
-                <div className="p-3.5 bg-white/[0.01] border border-white/[0.03] rounded-xl flex items-center justify-between">
+                <div className="p-3.5 bg-white/[0.01] border border-white/[0.03] rounded-lg flex items-center justify-between">
                   <div>
-                    <span className="text-white/40 block text-[9px] uppercase tracking-widest">GATE LITHOGRAPHY</span>
+                    <span className="text-slate-500 block text-[8px] uppercase tracking-widest">GATE LITHOGRAPHY</span>
                     <span className="text-white font-bold mt-0.5 block">3nm Neuromorphic Optical Gate</span>
                   </div>
-                  <Zap className="h-4 w-4 text-cyan-400" />
+                  <Zap className="h-4 w-4 text-blue-400" />
                 </div>
 
-                <div className="p-3.5 bg-white/[0.01] border border-white/[0.03] rounded-xl flex items-center justify-between">
+                <div className="p-3.5 bg-white/[0.01] border border-white/[0.03] rounded-lg flex items-center justify-between">
                   <div>
-                    <span className="text-white/40 block text-[9px] uppercase tracking-widest">BANDWIDTH INTERCONNECTS</span>
+                    <span className="text-slate-500 block text-[8px] uppercase tracking-widest">BANDWIDTH INTERCONNECTS</span>
                     <span className="text-white font-bold mt-0.5 block">2.4 Tbps Optical Fiber Transceiver</span>
                   </div>
-                  <Zap className="h-4 w-4 text-purple-400" />
+                  <Zap className="h-4 w-4 text-blue-400" />
                 </div>
 
-                <div className="p-3.5 bg-white/[0.01] border border-white/[0.03] rounded-xl flex items-center justify-between">
+                <div className="p-3.5 bg-white/[0.01] border border-white/[0.03] rounded-lg flex items-center justify-between">
                   <div>
-                    <span className="text-white/40 block text-[9px] uppercase tracking-widest">QUANTUM SYSTEM COHERENCE</span>
+                    <span className="text-slate-500 block text-[8px] uppercase tracking-widest">QUANTUM SYSTEM COHERENCE</span>
                     <span className="text-white font-bold mt-0.5 block">250 Microseconds Coherent</span>
                   </div>
-                  <Zap className="h-4 w-4 text-emerald-400" />
+                  <Zap className="h-4 w-4 text-blue-400" />
                 </div>
 
-                <div className="p-3.5 bg-white/[0.01] border border-white/[0.03] rounded-xl flex items-center justify-between">
+                <div className="p-3.5 bg-white/[0.01] border border-white/[0.03] rounded-lg flex items-center justify-between">
                   <div>
-                    <span className="text-white/40 block text-[9px] uppercase tracking-widest">COMPUTE CLUSTER METRIC</span>
+                    <span className="text-slate-500 block text-[8px] uppercase tracking-widest">COMPUTE CLUSTER METRIC</span>
                     <span className="text-white font-bold mt-0.5 block">24 ExaFLOPs AGI Node Capacity</span>
                   </div>
-                  <Zap className="h-4 w-4 text-rose-500" />
+                  <Zap className="h-4 w-4 text-blue-500" />
                 </div>
 
               </div>
             </div>
 
-            <div className="text-[9px] font-mono text-white/30 border-t border-white/5 pt-4 mt-6 flex justify-between items-center pointer-events-none">
+            <div className="text-[9px] font-mono text-slate-500 border-t border-white/5 pt-4 mt-6 flex justify-between items-center pointer-events-none">
               <span>SYS_TEMP: 0.15K (LIQUID HELIUM)</span>
               <span>NODE_ID: Photonic_09X</span>
             </div>

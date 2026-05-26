@@ -30,8 +30,8 @@ export default function Globe() {
     const colors = new Float32Array(particleCount * 3);
 
     const sphereRadius = 60;
-    const colorCyan = new THREE.Color("#00f0ff");
-    const colorPurple = new THREE.Color("#bd00ff");
+    const colorBlueMain = new THREE.Color("#1B4DFF");
+    const colorBlueSoft = new THREE.Color("#3B82F6");
 
     for (let i = 0; i < particleCount; i++) {
       // Golden ratio spacing for uniform sphere distribution
@@ -48,7 +48,7 @@ export default function Globe() {
 
       // Blend color based on vertical height
       const t = (y + sphereRadius) / (sphereRadius * 2);
-      const mixedColor = colorCyan.clone().lerp(colorPurple, t);
+      const mixedColor = colorBlueMain.clone().lerp(colorBlueSoft, t);
 
       colors[i * 3] = mixedColor.r;
       colors[i * 3 + 1] = mixedColor.g;
@@ -105,9 +105,9 @@ export default function Globe() {
       ringGeometry.setAttribute("position", new THREE.BufferAttribute(ringPositions, 3));
 
       const ringMaterial = new THREE.LineBasicMaterial({
-        color: r === 0 ? "#00f0ff" : r === 1 ? "#bd00ff" : "#ffffff",
+        color: r === 0 ? "#1B4DFF" : r === 1 ? "#3B82F6" : "#ffffff",
         transparent: true,
-        opacity: r === 0 ? 0.25 : r === 1 ? 0.15 : 0.08,
+        opacity: r === 0 ? 0.35 : r === 1 ? 0.2 : 0.08,
         blending: THREE.AdditiveBlending,
       });
 

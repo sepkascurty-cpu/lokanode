@@ -52,8 +52,8 @@ export default function SpaceDefense() {
       const centerY = height / 2;
       const maxRadius = Math.min(width, height) * 0.45;
 
-      // Draw background tactical grid circles
-      ctx.strokeStyle = "rgba(0, 240, 255, 0.08)";
+      // Draw background tactical grid circles - Styled with NASA Blue
+      ctx.strokeStyle = "rgba(59, 130, 246, 0.08)";
       ctx.lineWidth = 1;
       for (let r = maxRadius / 4; r <= maxRadius; r += maxRadius / 4) {
         ctx.beginPath();
@@ -70,19 +70,18 @@ export default function SpaceDefense() {
       ctx.stroke();
 
       // Draw scanning sweep
-      angle += 0.015;
+      angle += 0.012;
       ctx.save();
       ctx.translate(centerX, centerY);
       ctx.rotate(angle);
 
       // Gradient for sweep trail
       const sweepGrad = ctx.createRadialGradient(0, 0, 0, 0, 0, maxRadius);
-      sweepGrad.addColorStop(0, "rgba(0, 240, 255, 0.15)");
-      sweepGrad.addColorStop(1, "rgba(0, 240, 255, 0)");
+      sweepGrad.addColorStop(0, "rgba(27, 77, 255, 0.18)");
+      sweepGrad.addColorStop(1, "rgba(27, 77, 255, 0)");
 
       ctx.beginPath();
       ctx.moveTo(0, 0);
-      // Draw 60 degree wedge
       ctx.arc(0, 0, maxRadius, 0, Math.PI / 3);
       ctx.closePath();
       ctx.fillStyle = sweepGrad;
@@ -92,13 +91,13 @@ export default function SpaceDefense() {
       ctx.beginPath();
       ctx.moveTo(0, 0);
       ctx.lineTo(maxRadius, 0);
-      ctx.strokeStyle = "rgba(0, 240, 255, 0.6)";
+      ctx.strokeStyle = "rgba(59, 130, 246, 0.5)";
       ctx.lineWidth = 1.5;
       ctx.stroke();
 
       ctx.restore();
 
-      // Draw simulated orbital defense satellites (glowing green/cyan dots)
+      // Draw simulated orbital defense satellites (crisp white dots with blue outer glow)
       const satellites = [
         { x: centerX + maxRadius * 0.5 * Math.cos(angle - 0.5), y: centerY + maxRadius * 0.5 * Math.sin(angle - 0.5), label: "SAT_A (AGI_SHIELD)" },
         { x: centerX + maxRadius * 0.8 * Math.cos(angle + 1.2), y: centerY + maxRadius * 0.8 * Math.sin(angle + 1.2), label: "SAT_B (TACTICAL_NET)" },
@@ -107,21 +106,21 @@ export default function SpaceDefense() {
 
       satellites.forEach((sat) => {
         ctx.beginPath();
-        ctx.arc(sat.x, sat.y, 4, 0, Math.PI * 2);
-        ctx.fillStyle = "#34c759";
-        ctx.shadowBlur = 12;
-        ctx.shadowColor = "#34c759";
+        ctx.arc(sat.x, sat.y, 4.5, 0, Math.PI * 2);
+        ctx.fillStyle = "#ffffff";
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = "#3b82f6";
         ctx.fill();
         ctx.shadowBlur = 0;
 
-        ctx.fillStyle = "rgba(255, 255, 255, 0.4)";
+        ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
         ctx.font = "8px monospace";
         ctx.fillText(sat.label, sat.x + 8, sat.y + 3);
       });
 
       // Draw orbital satellite connections if mesh toggled active
       if (orbitMeshActive) {
-        ctx.strokeStyle = "rgba(189, 0, 255, 0.15)";
+        ctx.strokeStyle = "rgba(59, 130, 246, 0.15)";
         ctx.lineWidth = 0.8;
         ctx.beginPath();
         ctx.moveTo(satellites[0].x, satellites[0].y);
@@ -151,7 +150,6 @@ export default function SpaceDefense() {
         if (prev >= 100) {
           clearInterval(timer);
           setLaunchSequence(false);
-          // Append log
           const now = new Date();
           setLogs((logs) => [
             ...logs,
@@ -179,33 +177,36 @@ export default function SpaceDefense() {
       ...logs,
       {
         time: now.toLocaleTimeString(),
-        msg: "LAUNCH: SYNERGY-IX HEAVY ROCKET IGNITION SEQUENCE",
+        msg: "LAUNCH: ORBITER-V4 HEAVY ROCKET IGNITION SEQUENCE",
         type: "warning",
       },
     ]);
   };
 
   return (
-    <section id="space-defense" className="py-24 relative overflow-hidden bg-[#030303] border-t border-white/5">
+    <section id="space-defense" className="py-20 relative overflow-hidden bg-[#05070A] border-t border-white/5">
       
       {/* Background canvas starfield */}
       <div className="absolute inset-0 z-0">
-        <div className="cyber-grid opacity-10" />
-        <div className="absolute top-1/4 right-1/4 w-[45vw] h-[45vh] rounded-full filter blur-[150px] pointer-events-none bg-cyan-500/[0.03]" />
+        <div className="orbital-grid opacity-10" />
+        <div className="absolute top-1/4 right-1/4 w-[45vw] h-[45vh] rounded-full filter blur-[150px] pointer-events-none bg-blue-600/[0.02]" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 md:px-8 relative z-10 space-y-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-          <div className="space-y-3 text-left">
-            <div className="inline-flex items-center gap-2 text-cyan-400 font-mono text-xs uppercase tracking-widest">
-              <Radio className="h-4.5 w-4.5 animate-pulse text-cyan-400" />
+        <div className="border-b border-white/5 pb-5">
+          <div className="space-y-2 text-left">
+            <div className="inline-flex items-center gap-2 text-blue-400 font-mono text-[10px] uppercase tracking-widest">
+              <Radio className="h-4 w-4 animate-pulse text-blue-400" />
               <span>TACTICAL STRATEGIC COMMAND</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-extrabold uppercase text-white tracking-tight leading-none">
-              SPACE & <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">DEFENSE</span>
+            <h2 className="text-2xl sm:text-3xl font-heading font-black uppercase text-white tracking-tight leading-none">
+              SPACE & <span className="text-blue-500">DEFENSE COMMAND</span>
             </h2>
+            <p className="text-slate-400 font-sans text-xs sm:text-sm max-w-xl">
+              Simulating orbital defense locks and heavy booster ignition profiles. Connect to low-orbit satellites directly.
+            </p>
           </div>
         </div>
 
@@ -213,14 +214,14 @@ export default function SpaceDefense() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           
           {/* Radar Command Console (Center Visualizer) */}
-          <div className="lg:col-span-8 glass-panel rounded-2xl border border-white/5 p-6 flex flex-col justify-between shadow-2xl relative min-h-[400px]">
-            <div className="flex items-center justify-between border-b border-white/5 pb-4 hud-line font-mono text-xs">
+          <div className="lg:col-span-8 bg-space-secondary/20 rounded-xl border border-white/5 p-6 flex flex-col justify-between shadow-2xl relative min-h-[400px]">
+            <div className="flex items-center justify-between border-b border-white/5 pb-4 font-mono text-[10px]">
               <span className="text-white font-bold tracking-wider uppercase">ORBITAL INTERCEPT HUD GRID</span>
               <button
                 onClick={() => setOrbitMeshActive(!orbitMeshActive)}
-                className={`px-3 py-1 rounded-md text-[10px] tracking-widest font-bold cursor-pointer transition-all border ${
+                className={`px-3 py-1 rounded-md text-[9px] tracking-widest font-bold cursor-pointer transition-all border ${
                   orbitMeshActive 
-                    ? "bg-purple-500/10 text-purple-400 border-purple-500/30"
+                    ? "bg-blue-500/10 text-blue-400 border-blue-500/30"
                     : "text-white/40 border-white/10 hover:text-white"
                 }`}
               >
@@ -230,15 +231,15 @@ export default function SpaceDefense() {
 
             {/* Radar Canvas Container */}
             <div className="w-full flex-grow flex items-center justify-center py-6">
-              <canvas ref={canvasRef} className="w-full max-w-[320px] h-[320px]" />
+              <canvas ref={canvasRef} className="w-full max-w-[280px] h-[280px]" />
             </div>
 
             {/* Simulated telemetry tracker logs */}
-            <div className="border-t border-white/5 pt-4 font-mono text-[9px] text-white/50 flex flex-col gap-1.5 leading-relaxed text-left">
+            <div className="border-t border-white/5 pt-4 font-mono text-[9px] text-slate-500 flex flex-col gap-1.5 leading-relaxed text-left">
               {logs.slice(-3).map((log, index) => (
                 <div key={index} className="flex gap-2">
-                  <span className="text-white/30">[{log.time}]</span>
-                  <span className={log.type === "success" ? "text-emerald-400" : log.type === "warning" ? "text-amber-400" : "text-cyan-400"}>
+                  <span className="text-slate-600">[{log.time}]</span>
+                  <span className={log.type === "success" ? "text-emerald-400" : log.type === "warning" ? "text-amber-400" : "text-blue-400"}>
                     {log.msg}
                   </span>
                 </div>
@@ -250,33 +251,34 @@ export default function SpaceDefense() {
           <div className="lg:col-span-4 space-y-6">
             
             {/* Satellite Launcher Launcher */}
-            <div className="glass-panel rounded-2xl border border-white/5 p-6 space-y-6 shadow-2xl text-left">
+            <div className="bg-space-secondary/20 rounded-xl border border-white/5 p-6 space-y-6 shadow-2xl text-left relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-500/10 to-transparent" />
               <div className="flex items-center gap-2 border-b border-white/5 pb-3">
-                <Crosshair className="h-4 w-4 text-cyan-400" />
-                <span className="text-xs font-bold text-white font-mono uppercase tracking-wider">DEFENSE LAUNCH MATRIX</span>
+                <Crosshair className="h-4 w-4 text-blue-400" />
+                <span className="text-[10px] font-bold text-white font-mono uppercase tracking-wider">DEFENSE LAUNCH MATRIX</span>
               </div>
               
-              <p className="text-xs text-white/50 leading-relaxed font-sans">
+              <p className="text-xs text-slate-400 leading-relaxed font-sans">
                 Initiate a high-payload rocket launch sequence to deploy a custom post-quantum secure communications satellite orbital node.
               </p>
 
               <div className="space-y-4">
                 {launchSequence ? (
                   <div className="space-y-2 font-mono">
-                    <div className="flex justify-between text-[10px] text-white/60">
+                    <div className="flex justify-between text-[9px] text-slate-400">
                       <span>BOOSTER DELTA VELOCITY</span>
                       <span>{launchProgress}%</span>
                     </div>
-                    <div className="h-1 bg-white/10 w-full rounded-full overflow-hidden">
-                      <div className="bg-cyan-400 h-full transition-all duration-150" style={{ width: `${launchProgress}%` }} />
+                    <div className="h-1 bg-white/5 w-full rounded-full overflow-hidden">
+                      <div className="bg-blue-600 h-full transition-all duration-150" style={{ width: `${launchProgress}%` }} />
                     </div>
                   </div>
                 ) : (
                   <button
                     onClick={triggerLaunch}
-                    className="w-full py-3.5 bg-cyan-400 hover:bg-cyan-300 text-black font-semibold text-xs tracking-widest rounded-xl transition-all cursor-pointer hover:shadow-[0_0_25px_rgba(0,240,255,0.4)] flex items-center justify-center gap-2 uppercase"
+                    className="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs tracking-widest rounded-lg transition-all cursor-pointer shadow-[0_2px_15px_rgba(27,77,255,0.2)] hover:shadow-[0_2px_20px_rgba(27,77,255,0.35)] flex items-center justify-center gap-2 uppercase border border-blue-400/20"
                   >
-                    <Play className="h-3 w-3 fill-black" />
+                    <Play className="h-3 w-3 fill-white" />
                     <span>LAUNCH ORBITAL SATELLITE</span>
                   </button>
                 )}
@@ -284,28 +286,29 @@ export default function SpaceDefense() {
             </div>
 
             {/* Strategic Threat Indicator Index */}
-            <div className="glass-panel rounded-2xl border border-white/5 p-6 space-y-4 shadow-2xl text-left font-mono">
+            <div className="bg-space-secondary/20 rounded-xl border border-white/5 p-6 space-y-4 shadow-2xl text-left font-mono relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-500/10 to-transparent" />
               <div className="flex items-center gap-2 border-b border-white/5 pb-3">
                 <ShieldAlert className="h-4 w-4 text-red-500" />
-                <span className="text-xs font-bold text-white uppercase tracking-wider">SEC_THREAT LEVEL DETAILS</span>
+                <span className="text-[10px] font-bold text-white uppercase tracking-wider">SEC_THREAT LEVEL DETAILS</span>
               </div>
 
-              <div className="space-y-3.5 text-xs">
+              <div className="space-y-3.5 text-xs text-slate-300">
                 <div className="flex justify-between border-b border-white/5 pb-2">
-                  <span className="text-white/40">GLOBAL RADAR ALERTS</span>
-                  <span className="text-emerald-400">0 ACTIVE</span>
+                  <span className="text-slate-500">GLOBAL RADAR ALERTS</span>
+                  <span className="text-emerald-400 font-bold">0 ACTIVE</span>
                 </div>
                 <div className="flex justify-between border-b border-white/5 pb-2">
-                  <span className="text-white/40">KINETIC INTERCEPT NODES</span>
-                  <span className="text-white">12 SHIELD NODES</span>
+                  <span className="text-slate-500">KINETIC INTERCEPT NODES</span>
+                  <span className="text-white font-bold">12 SHIELD NODES</span>
                 </div>
                 <div className="flex justify-between border-b border-white/5 pb-2">
-                  <span className="text-white/40">SPACE COM ENCRYPTION</span>
-                  <span className="text-purple-400">ENTANGLED ACTIVE</span>
+                  <span className="text-slate-500">SPACE COM ENCRYPTION</span>
+                  <span className="text-blue-400 font-bold">ENTANGLED ACTIVE</span>
                 </div>
                 <div className="flex justify-between pt-1">
-                  <span className="text-white/40">SECURE CONSOLE STATUS</span>
-                  <span className="text-cyan-400 font-bold uppercase">SEC_SAFE</span>
+                  <span className="text-slate-500">SECURE CONSOLE STATUS</span>
+                  <span className="text-blue-400 font-bold uppercase">SEC_SAFE</span>
                 </div>
               </div>
             </div>

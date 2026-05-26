@@ -1,20 +1,24 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Space_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
-  title: "LokaNode — Next-Generation Technology Intelligence Platform",
-  description: "Global technology intelligence for the next civilization. Exploring the frontiers of AI, quantum computing, aerospace, semiconductor geopolitics, EV tech, and advanced machine intelligence.",
+  title: "LOKANODE — Futuristic Tech Newsroom | Technology Beyond Gravity",
+  description: "LOKANODE is a premium aerospace-modern technology newsroom. Exploring the frontiers of Artificial Intelligence, orbital space flight, quantum neural computing, robotics, and future civilizations.",
+  keywords: ["technology news", "aerospace", "space tech", "artificial intelligence", "robotics", "quantum computing", "semiconductor geopolitics"],
+  authors: [{ name: "LOKANODE News Team" }],
 };
 
 export default function RootLayout({
@@ -25,9 +29,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${spaceGrotesk.variable} ${inter.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#030303]">
+      <body className="min-h-full flex flex-col bg-[#05070A] text-white">
         {/* Hidden Google Translate Target */}
         <div id="google_translate_element" style={{ display: "none" }} />
         
@@ -51,6 +55,7 @@ export default function RootLayout({
           src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
           async
           defer
+          className="lazyload"
         />
       </body>
     </html>
