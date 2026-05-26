@@ -174,11 +174,7 @@ export default function Footer() {
           <div className="notranslate" translate="no">
             &copy; {currentYear} LOKANODE. All rights reserved. Technology Beyond Gravity.
           </div>
-          <div>
-            MISSION ENGINE SECURED. ENCRYPTION PROTOCOL STANDARD AES-256.
-          </div>
         </div>
-
       </div>
     </footer>
   );
