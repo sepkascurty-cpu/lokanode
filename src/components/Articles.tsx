@@ -58,54 +58,51 @@ export default function Articles() {
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
                 className="group flex flex-col bg-space-secondary/30 rounded-xl border border-white/5 overflow-hidden transition-all duration-300 hover:border-blue-500/20 hover:bg-space-secondary/50 hover:-translate-y-1 relative"
               >
-                {/* Visual Thumbnail */}
-                <div className="relative h-48 w-full overflow-hidden bg-space-black">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={article.featuredImage}
-                    alt={article.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter brightness-90 group-hover:brightness-100"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-space-black/80 to-transparent" />
-                  
-                  {/* Category Badge overlay */}
-                  <span className="absolute top-4 left-4 bg-blue-600/90 text-white font-mono text-[8px] font-bold tracking-widest px-2.5 py-0.5 rounded uppercase border border-blue-400/20">
-                    {article.category}
-                  </span>
-                </div>
-
-                {/* Content Area */}
-                <div className="p-5 flex-grow flex flex-col justify-between space-y-4">
-                  <div className="space-y-2">
-                    <span className="text-[9px] font-mono text-slate-500 uppercase tracking-widest block">
-                      {article.date} // {article.readTime}
-                    </span>
-                    <h3 className="text-sm sm:text-base font-heading font-black text-white uppercase leading-snug group-hover:text-blue-400 transition-colors line-clamp-2">
-                      <Link href={`/article/${article.slug}`}>
-                        {article.title}
-                      </Link>
-                    </h3>
-                    <p className="text-slate-400 text-xs line-clamp-3 leading-relaxed">
-                      {article.excerpt}
-                    </p>
-                  </div>
-
-                  {/* Card Bottom Meta */}
-                  <div className="border-t border-white/5 pt-3.5 flex items-center justify-between text-[9px] font-mono text-slate-500">
-                    <span className="uppercase">
-                      BY <strong className="text-slate-300">{article.author}</strong>
-                    </span>
+                <Link href={`/article/${article.slug}`} className="flex flex-col h-full w-full">
+                  {/* Visual Thumbnail */}
+                  <div className="relative h-48 w-full overflow-hidden bg-space-black">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={article.featuredImage}
+                      alt={article.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter brightness-90 group-hover:brightness-100"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-space-black/80 to-transparent" />
                     
-                    <Link
-                      href={`/article/${article.slug}`}
-                      className="inline-flex items-center gap-1 text-blue-400 font-bold group-hover:underline"
-                    >
-                      <span>READ DISPATCH</span>
-                      <ArrowUpRight className="h-3 w-3" />
-                    </Link>
+                    {/* Category Badge overlay */}
+                    <span className="absolute top-4 left-4 bg-blue-600/90 text-white font-mono text-[8px] font-bold tracking-widest px-2.5 py-0.5 rounded uppercase border border-blue-400/20">
+                      {article.category}
+                    </span>
                   </div>
-                </div>
+
+                  {/* Content Area */}
+                  <div className="p-5 flex-grow flex flex-col justify-between space-y-4">
+                    <div className="space-y-2">
+                      <span className="text-[9px] font-mono text-slate-500 uppercase tracking-widest block">
+                        {article.date} // {article.readTime}
+                      </span>
+                      <h3 className="text-sm sm:text-base font-heading font-black text-white uppercase leading-snug group-hover:text-blue-400 transition-colors line-clamp-2">
+                        {article.title}
+                      </h3>
+                      <p className="text-slate-400 text-xs line-clamp-3 leading-relaxed">
+                        {article.excerpt}
+                      </p>
+                    </div>
+
+                    {/* Card Bottom Meta */}
+                    <div className="border-t border-white/5 pt-3.5 flex items-center justify-between text-[9px] font-mono text-slate-500">
+                      <span className="uppercase">
+                        BY <strong className="text-slate-300">{article.author}</strong>
+                      </span>
+                      
+                      <div className="inline-flex items-center gap-1 text-blue-400 font-bold group-hover:underline">
+                        <span>READ DISPATCH</span>
+                        <ArrowUpRight className="h-3 w-3" />
+                      </div>
+                    </div>
+                  </div>
+                </Link>
               </motion.article>
             ))}
           </div>

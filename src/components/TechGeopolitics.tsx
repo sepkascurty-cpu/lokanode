@@ -121,9 +121,9 @@ export default function TechGeopolitics() {
                 
                 // Color schemes - mapped to NASA Blue
                 const statusColors = {
-                  "high-tension": "bg-blue-600 shadow-blue-500/50 border-blue-500/50",
-                  "strategic": "bg-blue-400 shadow-blue-400/50 border-blue-400/50",
-                  "command": "bg-white shadow-white/50 border-white/50",
+                  "high-tension": "bg-blue-600 border-blue-500/50",
+                  "strategic": "bg-blue-400 border-blue-400/50",
+                  "command": "bg-white border-white/50",
                 };
 
                 return (

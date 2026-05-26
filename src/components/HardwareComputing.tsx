@@ -125,13 +125,12 @@ export default function HardwareComputing() {
                         isSuper ? "animate-[spin_4s_linear_infinite]" : ""
                       }`} />
 
-                      {/* Glowing sphere core */}
                       <div 
                         className={`w-12 h-12 rounded-full transition-all duration-700 relative ${
                           isSuper 
-                            ? "bg-gradient-to-r from-blue-600 via-blue-500 to-blue-300 scale-110 animate-pulse shadow-[0_0_20px_rgba(59,130,246,0.3)]" 
+                            ? "bg-gradient-to-r from-blue-600 via-blue-500 to-blue-300 scale-110 animate-pulse" 
                             : isOne 
-                              ? "bg-blue-600 shadow-[0_0_15px_rgba(27,77,255,0.4)]" 
+                              ? "bg-blue-600" 
                               : "bg-white/5"
                         }`}
                       />
@@ -165,10 +164,10 @@ export default function HardwareComputing() {
                 >
                   Superposition
                 </button>
-                <button
+                 <button
                   onClick={measureStates}
                   disabled={isMeasuring}
-                  className="px-4 py-2 bg-white hover:bg-blue-600 text-black hover:text-white font-bold tracking-wider text-[9px] rounded-lg transition-all cursor-pointer uppercase font-mono hover:shadow-[0_0_15px_rgba(27,77,255,0.3)] border border-transparent disabled:opacity-50"
+                  className="px-4 py-2 bg-white hover:bg-blue-600 text-black hover:text-white font-bold tracking-wider text-[9px] rounded-lg transition-all cursor-pointer uppercase font-mono border border-transparent disabled:opacity-50"
                 >
                   {isMeasuring ? "COLLAPSING..." : "MEASURE STATES"}
                 </button>

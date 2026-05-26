@@ -108,10 +108,7 @@ export default function SpaceDefense() {
         ctx.beginPath();
         ctx.arc(sat.x, sat.y, 4.5, 0, Math.PI * 2);
         ctx.fillStyle = "#ffffff";
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = "#3b82f6";
         ctx.fill();
-        ctx.shadowBlur = 0;
 
         ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
         ctx.font = "8px monospace";
@@ -276,7 +273,7 @@ export default function SpaceDefense() {
                 ) : (
                   <button
                     onClick={triggerLaunch}
-                    className="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs tracking-widest rounded-lg transition-all cursor-pointer shadow-[0_2px_15px_rgba(27,77,255,0.2)] hover:shadow-[0_2px_20px_rgba(27,77,255,0.35)] flex items-center justify-center gap-2 uppercase border border-blue-400/20"
+                    className="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs tracking-widest rounded-lg transition-all cursor-pointer flex items-center justify-center gap-2 uppercase border border-blue-500/20"
                   >
                     <Play className="h-3 w-3 fill-white" />
                     <span>LAUNCH ORBITAL SATELLITE</span>

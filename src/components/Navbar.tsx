@@ -91,7 +91,16 @@ export default function Navbar() {
           {/* Logo - SpaceX / NASA style */}
           <div className="flex items-center gap-6">
             <Link href="/" className="flex items-center gap-2 group">
-              <span className="font-heading text-lg font-black tracking-[0.25em] text-white transition-all group-hover:text-blue-400">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/logo.png"
+                alt="Lokanode Logo"
+                className="h-6 w-6 object-contain"
+              />
+              <span 
+                className="font-heading text-lg font-black tracking-[0.25em] text-white transition-all group-hover:text-blue-400 notranslate"
+                translate="no"
+              >
                 LOKA<span className="text-blue-500 font-light">NODE</span>
               </span>
               <span className="h-1.5 w-1.5 rounded-full bg-blue-600 animate-pulse hidden sm:inline-block" />
@@ -182,7 +191,7 @@ export default function Navbar() {
             >
               <X className="h-4 w-4" />
             </button>
-            <h3 className="font-heading text-xs font-bold tracking-widest text-slate-400 uppercase mb-3">
+            <h3 className="font-heading text-xs font-bold tracking-widest text-slate-400 uppercase mb-3 notranslate" translate="no">
               LOKANODE // SEARCH DATABASE
             </h3>
             <div className="relative">
@@ -279,7 +288,7 @@ export default function Navbar() {
                 </button>
               </div>
             </div>
-            <div className="text-[8px] text-slate-600 tracking-wider">
+            <div className="text-[8px] text-slate-600 tracking-wider notranslate" translate="no">
               LOKANODE — TECHNOLOGY BEYOND GRAVITY. ALL SYSTEMS SECURED.
             </div>
           </div>

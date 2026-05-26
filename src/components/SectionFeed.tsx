@@ -50,42 +50,42 @@ export default function SectionFeed() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.6 }}
-                className="lg:col-span-7 flex flex-col justify-between bg-space-secondary/20 border border-white/5 rounded-xl p-6 hover:border-blue-500/20 hover:bg-space-secondary/40 transition-all group cursor-pointer shadow-xl relative overflow-hidden"
+                className="lg:col-span-7 bg-space-secondary/20 border border-white/5 rounded-xl hover:border-blue-500/20 hover:bg-space-secondary/40 transition-all group cursor-pointer shadow-xl relative overflow-hidden flex flex-col"
               >
-                {/* Visual Image Background overlay */}
-                <div className="absolute right-0 top-0 bottom-0 w-2/5 opacity-10 group-hover:opacity-20 transition-opacity">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={aiArticles[0].featuredImage}
-                    alt=""
-                    className="w-full h-full object-cover filter saturate-0"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-r from-space-secondary via-transparent to-transparent" />
-                </div>
-
-                <div className="space-y-4 relative z-10 max-w-xl">
-                  <span className="bg-blue-600/10 text-blue-400 font-mono text-[9px] font-bold tracking-widest px-2.5 py-0.5 rounded border border-blue-500/20 uppercase inline-block">
-                    {aiArticles[0].category} // EXCLUSIVE INTEL
-                  </span>
-                  
-                  <h4 className="text-xl sm:text-2xl font-heading font-black text-white uppercase leading-snug group-hover:text-blue-400 transition-colors">
-                    <Link href={`/article/${aiArticles[0].slug}`}>
-                      {aiArticles[0].title}
-                    </Link>
-                  </h4>
-                  
-                  <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
-                    {aiArticles[0].excerpt}
-                  </p>
-                </div>
-
-                <div className="border-t border-white/5 pt-4 mt-6 flex justify-between items-center text-[9px] font-mono text-slate-500 relative z-10">
-                  <div className="flex items-center gap-3">
-                    <span>BY {aiArticles[0].author.toUpperCase()}</span>
-                    <span>{aiArticles[0].date}</span>
+                <Link href={`/article/${aiArticles[0].slug}`} className="p-6 flex flex-col justify-between h-full w-full flex-grow">
+                  {/* Visual Image Background overlay */}
+                  <div className="absolute right-0 top-0 bottom-0 w-2/5 opacity-10 group-hover:opacity-20 transition-opacity">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={aiArticles[0].featuredImage}
+                      alt=""
+                      className="w-full h-full object-cover filter saturate-0"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-r from-space-secondary via-transparent to-transparent" />
                   </div>
-                  <span className="text-blue-500 font-bold group-hover:underline">OPEN SECTOR &gt;</span>
-                </div>
+
+                  <div className="space-y-4 relative z-10 max-w-xl">
+                    <span className="bg-blue-600/10 text-blue-400 font-mono text-[9px] font-bold tracking-widest px-2.5 py-0.5 rounded border border-blue-500/20 uppercase inline-block">
+                      {aiArticles[0].category} // EXCLUSIVE INTEL
+                    </span>
+                    
+                    <h4 className="text-xl sm:text-2xl font-heading font-black text-white uppercase leading-snug group-hover:text-blue-400 transition-colors">
+                      {aiArticles[0].title}
+                    </h4>
+                    
+                    <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                      {aiArticles[0].excerpt}
+                    </p>
+                  </div>
+
+                  <div className="border-t border-white/5 pt-4 mt-6 flex justify-between items-center text-[9px] font-mono text-slate-500 relative z-10">
+                    <div className="flex items-center gap-3">
+                      <span>BY {aiArticles[0].author.toUpperCase()}</span>
+                      <span>{aiArticles[0].date}</span>
+                    </div>
+                    <span className="text-blue-500 font-bold group-hover:underline">OPEN SECTOR &gt;</span>
+                  </div>
+                </Link>
               </motion.div>
             )}
 
@@ -98,24 +98,24 @@ export default function SectionFeed() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: "-100px" }}
                   transition={{ duration: 0.5, delay: idx * 0.15 }}
-                  className="bg-space-secondary/10 border border-white/5 rounded-xl p-5 hover:border-blue-500/20 hover:bg-space-secondary/20 transition-all flex flex-col justify-between flex-grow group cursor-pointer"
+                  className="bg-space-secondary/10 border border-white/5 rounded-xl hover:border-blue-500/20 hover:bg-space-secondary/20 transition-all flex flex-col justify-between flex-grow group cursor-pointer"
                 >
-                  <div className="space-y-2">
-                    <span className="text-[8px] font-mono text-slate-500 tracking-widest uppercase">
-                      {article.category} // RE-ROUTE NODE
-                    </span>
-                    <h5 className="text-xs sm:text-sm font-heading font-black text-white uppercase group-hover:text-blue-400 transition-colors leading-snug">
-                      <Link href={`/article/${article.slug}`}>
+                  <Link href={`/article/${article.slug}`} className="p-5 flex flex-col justify-between h-full w-full flex-grow">
+                    <div className="space-y-2">
+                      <span className="text-[8px] font-mono text-slate-500 tracking-widest uppercase">
+                        {article.category} // RE-ROUTE NODE
+                      </span>
+                      <h5 className="text-xs sm:text-sm font-heading font-black text-white uppercase group-hover:text-blue-400 transition-colors leading-snug">
                         {article.title}
-                      </Link>
-                    </h5>
-                  </div>
-                  <div className="flex justify-between items-center text-[8px] font-mono text-slate-500 border-t border-white/5 pt-2 mt-3">
-                    <span>{article.date} // {article.readTime}</span>
-                    <span className="text-blue-500 font-bold uppercase flex items-center gap-0.5">
-                      <span>READ</span> <ArrowRight className="h-2.5 w-2.5" />
-                    </span>
-                  </div>
+                      </h5>
+                    </div>
+                    <div className="flex justify-between items-center text-[8px] font-mono text-slate-500 border-t border-white/5 pt-2 mt-3">
+                      <span>{article.date} // {article.readTime}</span>
+                      <span className="text-blue-500 font-bold uppercase flex items-center gap-0.5">
+                        <span>READ</span> <ArrowRight className="h-2.5 w-2.5" />
+                      </span>
+                    </div>
+                  </Link>
                 </motion.div>
               ))}
             </div>

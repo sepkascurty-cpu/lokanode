@@ -31,7 +31,16 @@ export default function Footer() {
           {/* Taglines */}
           <div className="lg:col-span-6 space-y-5">
             <div className="flex items-center gap-2">
-              <span className="font-heading text-lg font-black tracking-[0.25em] text-white">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/logo.png"
+                alt="Lokanode Logo"
+                className="h-6 w-6 object-contain"
+              />
+              <span 
+                className="font-heading text-lg font-black tracking-[0.25em] text-white notranslate"
+                translate="no"
+              >
                 LOKA<span className="text-blue-500 font-light">NODE</span>
               </span>
               <span className="h-1.5 w-1.5 rounded-full bg-blue-600" />
@@ -162,7 +171,7 @@ export default function Footer() {
 
         {/* Bottom Segment: Copyrights */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 font-mono text-[9px] text-slate-600">
-          <div>
+          <div className="notranslate" translate="no">
             &copy; {currentYear} LOKANODE. All rights reserved. Technology Beyond Gravity.
           </div>
           <div>
